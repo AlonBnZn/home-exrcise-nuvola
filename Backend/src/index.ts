@@ -1,20 +1,17 @@
-// Import the 'express' module
-import express from "express";
+import "dotenv/config";
+import app from "./app";
+import { AppDataSource } from "./config/database";
+import { seedDatabase } from "./config/seed";
 
-// Create an Express application
-const app = express();
-
-// Set the port number for the server
-const port = 3000;
-
-// Define a route for the root path ('/')
-app.get("/", (req, res) => {
-  // Send a response to the client
-  res.send("Hello, TypeScript + Node.js + Express!");
-});
-
-// Start the server and listen on the specified port
-app.listen(port, () => {
-  // Log a message when the server is successfully running
-  console.log(`Server is running on http://localhost:${port}`);
-});
+const port = process.env.PORT || 3000;
+AppDataSource.initialize()
+  .then(async () => {
+    console.log("✅ Connected to PostgreSQL");
+    // await seedDatabase();
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Error connecting to PostgreSQL:", err);
+  });
