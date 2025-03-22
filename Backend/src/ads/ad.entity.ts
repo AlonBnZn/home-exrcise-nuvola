@@ -9,8 +9,8 @@ import { Campaign } from "../campaigns/campaign.entity";
 
 @Entity()
 export class Ad {
-  @PrimaryGeneratedColumn()
-  id!: number;
+  @PrimaryGeneratedColumn("uuid")
+  id!: string;
 
   @Column()
   adType!: "small" | "large";
@@ -18,13 +18,13 @@ export class Ad {
   @Column()
   cpm!: number;
 
-  @Column()
+  @Column({ type: "float" })
   remainingBudget!: number;
 
   @ManyToOne(() => Campaign, (campaign) => campaign.ads)
   @JoinColumn({ name: "campaignId" })
   campaign!: Campaign;
 
-  @Column()
-  campaignId!: number;
+  @Column("uuid")
+  campaignId!: string;
 }

@@ -16,7 +16,7 @@ export class CampaignRepository implements ICampaignRepository {
     return this.repository.find({ relations: ["ads"] });
   }
 
-  async findById(id: number): Promise<Campaign | null> {
+  async findById(id: string): Promise<Campaign | null> {
     return this.repository.findOne({ where: { id }, relations: ["ads"] });
   }
 }

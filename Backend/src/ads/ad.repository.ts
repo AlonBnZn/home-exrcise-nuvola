@@ -16,11 +16,11 @@ export class AdRepository implements IAdRepository {
     return this.repository.find({ relations: ["campaign"] });
   }
 
-  async findById(id: number): Promise<Ad | null> {
+  async findById(id: string): Promise<Ad | null> {
     return this.repository.findOne({ where: { id }, relations: ["campaign"] });
   }
 
-  async updateRemainingBudget(adId: number, newBudget: number): Promise<void> {
+  async updateRemainingBudget(adId: string, newBudget: number): Promise<void> {
     await this.repository.update(adId, { remainingBudget: newBudget });
   }
 }

@@ -3,10 +3,10 @@ import { Ad } from "../ads/ad.entity";
 
 @Entity()
 export class Campaign {
-  @PrimaryGeneratedColumn()
-  id!: number;
+  @PrimaryGeneratedColumn("uuid")
+  id!: string;
 
-  @Column()
+  @Column({ type: "float" })
   campaignBudget!: number;
 
   @Column()

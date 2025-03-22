@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 AppDataSource.initialize()
   .then(async () => {
     console.log("✅ Connected to PostgreSQL");
-    // await seedDatabase();
+    await seedDatabase();
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });
